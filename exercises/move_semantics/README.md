@@ -1,10 +1,9 @@
-# Move Semantics
+# 所有权与移动语义
 
-These exercises are adapted from [pnkfelix](https://github.com/pnkfelix)'s [Rust Tutorial](https://pnkfelix.github.io/rust-examples-icfp2014/) -- Thank you Felix!!!
+这一章练习 Rust 的所有权、移动、借用和可变借用。  
+这些规则是 Rust 内存安全模型的核心。
 
-## Further information
+## 进一步了解
 
-For this section, the book links are especially important.
-
-- [Ownership](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)
-- [Reference and borrowing](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html)
+- [What is Ownership?](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)
+- [References and Borrowing](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html)

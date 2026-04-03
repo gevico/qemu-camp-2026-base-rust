@@ -1,24 +1,31 @@
-# QEMU 训练营 2026 基础阶段 Rust
+# QEMU 训练营基础阶段 Rust
 
-这个仓库用于 QEMU 训练营基础阶段的 Rust 练习，内容基于 Rustlings。
+这个仓库现在是完整的 Rustlings 题库版本，作为 QEMU 训练营基础阶段的 Rust 语言练习。
 
-## 使用方式
+## 目录说明
 
-1. 在自己的 GitHub 作业仓库中完成 `exercises/` 下的练习。
-2. 本地安装依赖后执行 `cargo install --force --path .` 安装 `rustlings`。
-3. 使用 `rustlings watch`、`rustlings run <exercise>`、`rustlings hint <exercise>` 逐步完成题目。
-4. 完成阶段性练习后直接 `git add . && git commit -m "update" && git push`。
-5. GitHub Actions 会自动评测；如果仓库配置了 OpenCamp secrets，还会把分数回传到 OpenCamp。
+### `exercises`
 
-## OpenCamp 回传配置
+保留完整 Rustlings 练习题和章节说明，继续作为基础阶段 Rust 语言练习使用。
 
-如果你希望 GitHub Actions 的成绩显示到 OpenCamp 页面，需要在仓库或组织里配置这些 secrets：
+### `src`
 
-- `QEMU_CAMP_2026_COURSE_POST_API`
-- `QEMU_CAMP_2026_RUST_AUTUMN_TOKEN`
-- `QEMU_CAMP_2026_RUST_AUTUMN_COURSE_ID`
+Rustlings 命令行工具本体，用来执行 `watch`、`run`、`hint`、`verify` 等练习流程。
 
-工作流文件在 `.github/workflows/rust.yml`。`pull_request` 场景只做评测，不回传成绩。
+### `tests`
+
+Rustlings 的集成测试与评测 fixture，用来验证题库、命令行为和评分流程。
+
+## 自动评测
+
+当前 GitHub Actions 默认会：
+
+1. 编译并运行 Rustlings 评测
+2. 汇总题目完成情况
+3. 在 `push main/master` 时把成绩回传到 OpenCamp
+4. 在 `pull_request` 场景下只做评测，不回传 OpenCamp
+
+工作流文件在 `.github/workflows/rust.yml`。
 
 ## 常用命令
 
@@ -33,190 +40,6 @@ cargo test --test cicv --verbose
 
 ## 说明
 
-- 本仓库保留 Rustlings 的原始题目结构，适合做基础阶段入门训练。
+- 本仓库基于 rustlings 5.5.1 的完整题库整理而成。
 - 评分以 GitHub Actions 结果为准。
 - OpenCamp 回传用户名使用触发 workflow 的 GitHub 用户名。
-
-下面是 Rustlings 官方说明，可继续参考。
-
-# rustlings 🦀❤️
-
-</div>
-
-Greetings and welcome to `rustlings`. This project contains small exercises to get you used to reading and writing Rust code. This includes reading and responding to compiler messages!
-
-_...looking for the old, web-based version of Rustlings? Try [here](https://github.com/rust-lang/rustlings/tree/rustlings-1)_
-
-Alternatively, for a first-time Rust learner, there are several other resources:
-
-- [The Book](https://doc.rust-lang.org/book/index.html) - The most comprehensive resource for learning Rust, but a bit theoretical sometimes. You will be using this along with Rustlings!
-- [Rust By Example](https://doc.rust-lang.org/rust-by-example/index.html) - Learn Rust by solving little exercises! It's almost like `rustlings`, but online
-
-## Getting Started
-
-_Note: If you're on MacOS, make sure you've installed Xcode and its developer tools by typing `xcode-select --install`._
-_Note: If you're on Linux, make sure you've installed gcc. Deb: `sudo apt install gcc`. Yum: `sudo yum -y install gcc`._
-
-You will need to have Rust installed. You can get it by visiting https://rustup.rs. This'll also install Cargo, Rust's package/project manager.
-
-## MacOS/Linux
-
-Just run:
-
-```bash
-curl -L https://raw.githubusercontent.com/rust-lang/rustlings/main/install.sh | bash
-```
-Or if you want it to be installed to a different path:
-
-```bash
-curl -L https://raw.githubusercontent.com/rust-lang/rustlings/main/install.sh | bash -s mypath/
-```
-
-This will install Rustlings and give you access to the `rustlings` command. Run it to get started!
-
-### Nix
-
-Basically: Clone the repository at the latest tag, finally run `nix develop` or `nix-shell`.
-
-```bash
-# find out the latest version at https://github.com/rust-lang/rustlings/releases/latest (on edit 5.5.1)
-git clone -b 5.5.1 --depth 1 https://github.com/rust-lang/rustlings
-cd rustlings
-# if nix version > 2.3
-nix develop
-# if nix version <= 2.3
-nix-shell
-```
-
-## Windows
-
-In PowerShell (Run as Administrator), set `ExecutionPolicy` to `RemoteSigned`:
-
-```ps1
-Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
-```
-
-Then, you can run:
-
-```ps1
-Start-BitsTransfer -Source https://raw.githubusercontent.com/rust-lang/rustlings/main/install.ps1 -Destination $env:TMP/install_rustlings.ps1; Unblock-File $env:TMP/install_rustlings.ps1; Invoke-Expression $env:TMP/install_rustlings.ps1
-```
-
-To install Rustlings. Same as on MacOS/Linux, you will have access to the `rustlings` command after it. Keep in mind that this works best in PowerShell, and any other terminals may give you errors.
-
-If you get a permission denied message, you might have to exclude the directory where you cloned Rustlings in your antivirus.
-
-## Browser
-
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/rust-lang/rustlings)
-
-[![Open Rustlings On Codespaces](https://github.com/codespaces/badge.svg)](https://github.com/codespaces/new/?repo=rust-lang%2Frustlings&ref=main)
-
-## Manually
-
-Basically: Clone the repository at the latest tag, run `cargo install --path .`.
-
-```bash
-# find out the latest version at https://github.com/rust-lang/rustlings/releases/latest (on edit 5.5.1)
-git clone -b 5.5.1 --depth 1 https://github.com/rust-lang/rustlings
-cd rustlings
-cargo install --force --path .
-```
-
-If there are installation errors, ensure that your toolchain is up to date. For the latest, run:
-
-```bash
-rustup update
-```
-
-Then, same as above, run `rustlings` to get started.
-
-## Doing exercises
-
-The exercises are sorted by topic and can be found in the subdirectory `rustlings/exercises/<topic>`. For every topic there is an additional README file with some resources to get you started on the topic. We really recommend that you have a look at them before you start.
-
-The task is simple. Most exercises contain an error that keeps them from compiling, and it's up to you to fix it! Some exercises are also run as tests, but rustlings handles them all the same. To run the exercises in the recommended order, execute:
-
-```bash
-rustlings watch
-```
-
-This will try to verify the completion of every exercise in a predetermined order (what we think is best for newcomers). It will also rerun automatically every time you change a file in the `exercises/` directory. If you want to only run it once, you can use:
-
-```bash
-rustlings verify
-```
-
-This will do the same as watch, but it'll quit after running.
-
-In case you want to go by your own order, or want to only verify a single exercise, you can run:
-
-```bash
-rustlings run myExercise1
-```
-
-Or simply use the following command to run the next unsolved exercise in the course:
-
-```bash
-rustlings run next
-```
-
-In case you get stuck, you can run the following command to get a hint for your
-exercise:
-
-```bash
-rustlings hint myExercise1
-```
-
-You can also get the hint for the next unsolved exercise with the following command:
-
-```bash
-rustlings hint next
-```
-
-To check your progress, you can run the following command:
-
-```bash
-rustlings list
-```
-
-## Testing yourself
-
-After every couple of sections, there will be a quiz that'll test your knowledge on a bunch of sections at once. These quizzes are found in `exercises/quizN.rs`.
-
-## Enabling `rust-analyzer`
-
-Run the command `rustlings lsp` which will generate a `rust-project.json` at the root of the project, this allows [rust-analyzer](https://rust-analyzer.github.io/) to parse each exercise.
-
-## Continuing On
-
-Once you've completed Rustlings, put your new knowledge to good use! Continue practicing your Rust skills by building your own projects, contributing to Rustlings, or finding other open-source projects to contribute to.
-
-## Uninstalling Rustlings
-
-If you want to remove Rustlings from your system, there are two steps. First, you'll need to remove the exercises folder that the install script created
-for you:
-
-```bash
-rm -rf rustlings # or your custom folder name, if you chose and or renamed it
-```
-
-Second, run `cargo uninstall` to remove the `rustlings` binary:
-
-```bash
-cargo uninstall rustlings
-```
-
-Now you should be done!
-
-## Contributing
-
-See [CONTRIBUTING.md](./CONTRIBUTING.md).
-
-Development-focused discussion about Rustlings happens in the [**rustlings** stream](https://rust-lang.zulipchat.com/#narrow/stream/334454-rustlings)
-on the [Rust Project Zulip](https://rust-lang.zulipchat.com). Feel free to start a new thread there
-if you have ideas or suggestions!
-
-## Contributors ✨
-
-Thanks goes to the wonderful people listed in [AUTHORS.md](./AUTHORS.md) 🎉
