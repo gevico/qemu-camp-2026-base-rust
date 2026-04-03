@@ -1,8 +1,9 @@
 use assert_cmd::prelude::*;
 use glob::glob;
 use predicates::boolean::PredicateBooleanExt;
-use std::fs::File;
+use std::fs::{self, File};
 use std::io::Read;
+use std::path::Path;
 use std::process::Command;
 
 #[test]
@@ -164,6 +165,21 @@ fn all_exercises_require_confirmation() {
                     path
                 )
             });
+    }
+}
+
+#[test]
+fn info_toml_only_references_existing_exercises() {
+    let info = fs::read_to_string("info.toml").unwrap();
+    let value = info.parse::<toml::Value>().unwrap();
+    let exercises = value["exercises"].as_array().unwrap();
+
+    for exercise in exercises {
+        let path = exercise["path"].as_str().unwrap();
+        assert!(
+            Path::new(path).exists(),
+            "exercise path listed in info.toml does not exist: {path}"
+        );
     }
 }
 
